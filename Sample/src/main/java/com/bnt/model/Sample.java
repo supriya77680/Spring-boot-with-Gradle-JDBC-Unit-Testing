@@ -1,0 +1,17 @@
+package com.bnt.model;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Sample {
+
+  
+    private Long id;
+    private String name;
+    private String mobile;
+    
+}
