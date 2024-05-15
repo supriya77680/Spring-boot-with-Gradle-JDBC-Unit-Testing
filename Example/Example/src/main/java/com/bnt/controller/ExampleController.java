@@ -1,4 +1,5 @@
 package com.bnt.controller;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,40 +14,40 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bnt.model.Sample;
-import com.bnt.service.SampleService;
+import com.bnt.model.Example;
+import com.bnt.service.ExampleService;
 
 @RestController
-public class SampleController {
+public class ExampleController {
 
     @Autowired
-    private SampleService sampleService;
+    ExampleService exampleService;
 
-    @GetMapping("/hello")
+     @GetMapping("/hello")
     public String getCheck(){
         return "Hello this is alive";
     }
 
     @PostMapping("/saveAll")    
-    public Sample saveData(@RequestBody Sample sample) {
-        return sampleService.saveData(sample);
+    public Example saveData(@RequestBody Example example) {
+        return exampleService.saveData(example);
     }
 
     @GetMapping("/getAll")
-    public List<Sample> getAll() {
-        return sampleService.getAll();
+    public List<Example> getAll() {
+        return exampleService.getAll();
     }
 
       @PutMapping("update-name/{id}")
-    public Sample updateName(@PathVariable Long id, @RequestParam("name") String name, @RequestParam("mobile") String mobile) {
-        Sample updateName = new Sample(id, name, mobile);
-        sampleService.updateName(updateName);
+    public Example updateName(@PathVariable Long id, @RequestParam("name") String name, @RequestParam("mobile") String mobile) {
+        Example updateName = new Example(id, name, mobile);
+        exampleService.updateName(updateName);
         return updateName;
     }
 
        @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteData(@PathVariable int id) {
-        sampleService.delete(id);
+        exampleService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     

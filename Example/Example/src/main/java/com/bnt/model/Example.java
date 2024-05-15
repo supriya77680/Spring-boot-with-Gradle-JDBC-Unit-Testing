@@ -7,9 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Sample {
+public class Example {
 
-  
     private Long id;
     private String name;
     private String mobile;
