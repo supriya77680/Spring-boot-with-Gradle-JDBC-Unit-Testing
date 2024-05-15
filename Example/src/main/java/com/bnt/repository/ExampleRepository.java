@@ -19,7 +19,6 @@ public class ExampleRepository{
    @Autowired
    DataSource dataSource;
 
-   @Autowired
     public ExampleRepository(DataSource dataSource) {
         this.dataSource = dataSource;
     }

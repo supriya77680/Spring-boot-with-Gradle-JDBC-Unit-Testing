@@ -23,6 +23,7 @@ public class ExampleController {
     @Autowired
     ExampleService exampleService;
 
+    
      @GetMapping("/hello")
     public String getCheck(){
         return "Hello this is alive";
