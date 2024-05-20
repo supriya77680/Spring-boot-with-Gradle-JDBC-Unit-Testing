@@ -30,5 +30,9 @@ public class ExampleService {
         exampleRepository.delete(id);
     }
 
+    public Example updateMobile(Long id, String mobile) {
+        return exampleRepository.updateMobile(id, mobile);
+    }
+
 
 }

@@ -89,14 +89,14 @@ public class ExampleRepository{
  
     public Example updateName(Example example) {
         try {
-            Connection con = dataSource.getConnection();
-            PreparedStatement psmt = con.prepareStatement("UPDATE testtable SET name = ?, mobile = ? WHERE id = ?");
+            Connection connection = dataSource.getConnection();
+            PreparedStatement psmt = connection.prepareStatement("UPDATE testtable SET name = ?, mobile = ? WHERE id = ?");
             psmt.setString(1, example.getName());
             psmt.setString(2, example.getMobile());
             psmt.setLong(3, example.getId());
             psmt.executeUpdate();
             psmt.close();
-            con.close();
+            connection.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -109,10 +109,29 @@ public class ExampleRepository{
             PreparedStatement statement = connection.prepareStatement("DELETE FROM testtable WHERE id = ?");
             statement.setInt(1, id);
             statement.executeUpdate();
+            statement.close();
+            connection.close();
         } catch (Exception e) {
            
         }
     }
+
+    public Example updateMobile(Long id, String mobile) {
+        try {
+            Connection connection = dataSource.getConnection();
+            PreparedStatement psmt = connection.prepareStatement("UPDATE testtable SET mobile = ? WHERE id = ?");
+            psmt.setString(1, mobile);
+            psmt.setLong(2, id);
+            psmt.executeUpdate();
+            psmt.close();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new Example(id, "", mobile); // return the updated example with only id and mobile set
+    }
+
+
 
 
 }

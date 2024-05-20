@@ -14,6 +14,8 @@ import javax.sql.DataSource;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -24,10 +26,14 @@ import com.bnt.repository.ExampleRepository;
 @ExtendWith(MockitoExtension.class)
 public class RepositoryTest {
 
+    @Mock
     private DataSource dataSource;
+    @Mock
     private Connection connection;
+    @Mock
     private PreparedStatement preparedStatement;
     private ResultSet resultSet;
+    @InjectMocks
     private ExampleRepository exampleRepository;
 
    @BeforeEach
@@ -118,6 +124,19 @@ public class RepositoryTest {
         verify(preparedStatement).setString(1, example.getName());
         verify(preparedStatement).setString(2, example.getMobile());
         verify(preparedStatement).setLong(3, example.getId());
+        verify(preparedStatement).executeUpdate();
+        verify(preparedStatement).close();
+        verify(connection).close();
+    }
+
+    @Test
+    public void testDelete() throws Exception {
+        int idToDelete = 1;
+        when(dataSource.getConnection()).thenReturn(connection);
+        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
+        exampleRepository.delete(idToDelete);
+        verify(connection).prepareStatement("DELETE FROM testtable WHERE id = ?");
+        verify(preparedStatement).setInt(1, idToDelete);
         verify(preparedStatement).executeUpdate();
         verify(preparedStatement).close();
         verify(connection).close();
