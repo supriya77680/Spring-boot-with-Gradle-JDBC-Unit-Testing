@@ -25,15 +25,33 @@ public class ExampleRepository{
 
     public Example saveData(Example example){
         try {
+            /*
+             * Connection is an interface. It establishes connection with the database where we have to give
+             * url, username, password for establishing connection here datasource is doing that
+             * getConnection() is method in DriverManager but here it is in DataSource.class
+             */
             Connection connection = dataSource.getConnection();
+            /*
+             * Statement interface is a part of Connection interface. Statement, PreparedStatement, CallableStatement
+             * Statement is used for executing simple SQL queries ans is static
+             * PreparedStatement is used for executing parameterized queries and is more efficient.
+             * CallableStatement is used for compile SQL queries.
+             */
             PreparedStatement psmt = connection.prepareStatement("INSERT INTO testtable (id, name, mobile) VALUES (?, ?, ?)");
             psmt.setLong(1, example.getId());
             psmt.setString(2, example.getName());
             psmt.setString(3, example.getMobile());
+            /*
+             When you want to insert any data use executeUpdate and if you want to retrieve data use executeQuery 
+             */
             psmt.executeUpdate();
             psmt.close();
             connection.close();
         } catch (Exception e) {
+            /*
+             * SQLException handles errors and exceptions related to database interactions. It allows for more 
+             * accurate debugging and error resolution.
+             */
         }
         return example;
     }
@@ -43,7 +61,14 @@ public class ExampleRepository{
         try {
             Connection connection = dataSource.getConnection();
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM testtable");
+            /*
+             * ResultSet is a part of Statement interface.It is used to retrieve, manipulate the data from columns.
+             * Whatever it is retrieving it is storing in ResultSet
+             */
             ResultSet resultSet = statement.executeQuery();
+            /*
+             * next() method moves the cursor forward one row from its current position.
+             */
             while (resultSet.next()) {
                 Example test = new Example();
                 test.setId(resultSet.getLong("id"));

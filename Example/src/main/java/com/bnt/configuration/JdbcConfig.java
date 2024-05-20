@@ -26,10 +26,17 @@ public class JdbcConfig {
     @Value("${spring.datasource.driver-class-name}")
     private String driverClassName;
 
-    /* DataSource is an interface provided by JDBC for connecting to a database. */
+        /* DataSource is an interface provided by JDBC for connecting to a database. */
 
     @Bean
     public DataSource dataSource() {
+
+        /*
+        Driver Manager is a service of the JDBC APIs that manages the drivers and establishes a 
+        connection between a JDBC client and a database server.
+        Driver Manager is a class.
+        */
+
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(driverClassName);
         dataSource.setUrl(url);

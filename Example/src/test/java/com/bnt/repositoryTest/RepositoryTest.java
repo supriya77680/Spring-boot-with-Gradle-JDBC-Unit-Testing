@@ -13,10 +13,15 @@ import javax.sql.DataSource;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import com.bnt.model.Example;
 import com.bnt.repository.ExampleRepository;
 
+@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 public class RepositoryTest {
 
     private DataSource dataSource;
@@ -118,9 +123,6 @@ public class RepositoryTest {
         verify(connection).close();
     }
 
-    
-
-    
     }
     
 

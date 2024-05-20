@@ -23,7 +23,6 @@ public class ExampleController {
     @Autowired
     ExampleService exampleService;
 
-    
      @GetMapping("/hello")
     public String getCheck(){
         return "Hello this is alive";
@@ -51,5 +50,15 @@ public class ExampleController {
         exampleService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    /*
+     * PUT: It's like taking a blank form and completely filling it out again. You provide a complete 
+     * representation of the resource, and the server replaces the existing resource with the new
+     *  representation. If the resource doesn't exist, it might create it.
+     *
+     * PATCH: It's like taking that same form but only updating the fields that have changed. 
+     * You provide partial information, and the server applies those changes to the existing resource.
+     * It's suitable for updating specific attributes or properties without affecting the entire resource.
+     */
     
 }

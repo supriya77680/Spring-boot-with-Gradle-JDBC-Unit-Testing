@@ -22,18 +22,32 @@ import com.bnt.repository.ExampleRepository;
 import com.bnt.service.ExampleService;
 
 @SpringBootTest
+/*
+ * @ExtendWith(MockitoExtension.class): This annotation is from JUnit 5 and is used to register the
+ *  MockitoExtension to enable Mockito annotations such as @Mock, @InjectMocks, etc., to be used in the 
+ * test class.
+ */
 @ExtendWith(MockitoExtension.class)
 class ControllerTest {
 
+	/*
+	 * This annotation is from Mockito and is used to create a mock object of a class or interface
+	 */
     @Mock
     ExampleRepository exampleRepository;
 
     @Mock
     ExampleService exampleService;
 
+	/*
+	 * This annotation is from Mockito and is used to inject mocks into the class under test.
+	 */
     @InjectMocks
     ExampleController exampleController;
 
+	/*
+	 * The @Test annotation is part of the JUnit testing framework and is used to denote that a method is a test method.
+	 */
     @Test
     void getCheckTest(){
 		String expectedResult = "Hello this is alive";
